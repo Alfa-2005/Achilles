@@ -9,7 +9,8 @@ int main() {
     int key;
 
     // Taking user input.
-    printf("Enter a message to encrypt: ");
+
+    printf("Enter a message to decrypt: ");
 
     scanf("%s", text);
 
@@ -17,39 +18,36 @@ int main() {
 
     scanf("%d", & key);
 
-    // Visiting character by character.
-
+    // Visiting each character.
     for (int i = 0; text[i] != '\0'; ++i) {
 
         ch = text[i];
         // Check for valid characters.
         if (isalnum(ch)) {
-
             //Lowercase characters.
             if (islower(ch)) {
-                ch = (ch - 'a' + key) % 26 + 'a';
+                ch = (ch - 'a' - key + 26) % 26 + 'a';
             }
             // Uppercase characters.
             if (isupper(ch)) {
-                ch = (ch - 'A' + key) % 26 + 'A';
+                ch = (ch - 'A' - key + 26) % 26 + 'A';
             }
-
             // Numbers.
             if (isdigit(ch)) {
-                ch = (ch - '0' + key) % 10 + '0';
+                ch = (ch - '0' - key + 10) % 10 + '0';
             }
         }
-        // Invalid character.
+        // Invalid characters.
         else {
             printf("Invalid Message");
         }
-
-        // Adding encoded answer.
+        // Adding decoded character back.
         text[i] = ch;
 
     }
 
-    printf("Encrypted message: %s", text);
+    printf("Decrypted message: %s", text);
 
     return 0;
+
 }
